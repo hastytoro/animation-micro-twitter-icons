@@ -65,14 +65,20 @@ message.addEventListener("click", () => {
 
 zoomBtn.addEventListener("click", () => {
   let zoomTL = gsap.timeline({
-    defaults: { duration: 2, ease: "elastic.out(2, 0.2)" },
+    defaults: { duration: 2, ease: "elastic.out(1, 0.2)" },
   });
   if (zoomBtn.children[0].className === "fa-solid fa-magnifying-glass-plus") {
     zoomTL.fromTo(".container", { scale: 1 }, { scale: 1.5 });
     zoomTL.fromTo(
       ".zoom-btn",
-      { background: "transparent" },
-      { background: "var(--background)" },
+      {
+        rotation: "0deg",
+        duration: 0.2,
+      },
+      {
+        background: "var(--shadow)",
+        rotation: "4deg",
+      },
       "<"
     );
     zoomBtn.children[0].className = "fa-solid fa-magnifying-glass-minus";
@@ -80,8 +86,15 @@ zoomBtn.addEventListener("click", () => {
     zoomTL.fromTo(".container", { scale: 1.5 }, { scale: 1 });
     zoomTL.fromTo(
       ".zoom-btn",
-      { background: "var(--background)" },
-      { background: "transparent" },
+      {
+        background: "var(--shadow)",
+        rotation: "4deg",
+        duration: 0.2,
+      },
+      {
+        background: "transparent",
+        rotation: "0deg",
+      },
       "<"
     );
     zoomBtn.children[0].className = "fa-solid fa-magnifying-glass-plus";
